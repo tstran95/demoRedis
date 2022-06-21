@@ -1,5 +1,8 @@
 package com.redis.config;
 
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,19 +27,26 @@ public class RedisConfig {
     private int redisPort;
 
 
+//    @Bean
+//    public LettuceConnectionFactory redisConnectionFactory() {
+//        // Tạo Standalone Connection tới Redis
+//        return new LettuceConnectionFactory(new RedisStandaloneConfiguration(redisHost, redisPort));
+//    }
+
     @Bean
-    public LettuceConnectionFactory redisConnectionFactory() {
-        // Tạo Standalone Connection tới Redis
-        return new LettuceConnectionFactory(new RedisStandaloneConfiguration(redisHost, redisPort));
+    public RedissonClient redissonClient() {
+        Config config = new Config();
+        config.useSingleServer()
+                .setAddress("redis://localhost:6379")
+                .setConnectionPoolSize(10)
+                .setConnectionMinimumIdleSize(5)
+                .setConnectTimeout(30000);
+        return Redisson.create(config);
     }
 
     @Bean
     @Primary
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        // tạo ra một RedisTemplate
-        // Với Key là Object
-        // Value là Object
-        // RedisTemplate giúp chúng ta thao tác với Redis
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
         return template;

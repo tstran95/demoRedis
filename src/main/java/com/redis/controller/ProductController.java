@@ -16,7 +16,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    @Cacheable(value = "productCache")
+//    @Cacheable(value = "productCache")
     public Product saveProd(@RequestBody Product product){
         return productService.saveProd(product);
     }
