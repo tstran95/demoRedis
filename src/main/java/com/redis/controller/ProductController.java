@@ -3,6 +3,7 @@ package com.redis.controller;
 import com.redis.entity.Product;
 import com.redis.service.ProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
+    @Cacheable(value = "productCache")
     public Product saveProd(@RequestBody Product product){
         return productService.saveProd(product);
     }

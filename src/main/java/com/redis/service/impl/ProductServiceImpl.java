@@ -27,7 +27,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProd(Product product) {
-        return null;
+        template.opsForHash().put(PRODUCT_KEY , product.getId() , product);
+        return product;
     }
 
     @Override
