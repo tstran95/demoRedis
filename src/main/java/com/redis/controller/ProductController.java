@@ -1,9 +1,9 @@
 package com.redis.controller;
 
 import com.redis.entity.Product;
+import com.redis.reponse.ProductResponse;
 import com.redis.service.ProductService;
 import lombok.AllArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,9 +16,18 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-//    @Cacheable(value = "productCache")
-    public Product saveProd(@RequestBody Product product){
-        return productService.saveProd(product);
+    public ProductResponse saveProd(@RequestBody Product product) {
+        ProductResponse response = new ProductResponse();
+        try {
+            productService.saveProd(product);
+            response.setRCode("00");
+            response.setMessage("Success!!!");
+
+        } catch (Exception e) {
+            response.setRCode("01");
+            response.setMessage(e.getMessage());
+        }
+        return response;
     }
 
     @GetMapping
@@ -26,13 +35,38 @@ public class ProductController {
         return productService.getAllProd();
     }
 
-    @GetMapping("/{id}")
-    public Product getById(@PathVariable Long id) {
-        return productService.getById(id);
+    @GetMapping("/{num}")
+    public ProductResponse getByTransNum(@PathVariable String num) {
+
+        ProductResponse response = new ProductResponse();
+        try {
+            productService.getByTransNum(num);
+            response.setRCode("00");
+            response.setMessage("Success!!!");
+        } catch (Exception e) {
+            response.setRCode("01");
+            response.setMessage(e.getMessage());
+        }
+        return response;
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteProd(@PathVariable Long id) {
-        productService.deleteProd(id);
+    @DeleteMapping("/{num}")
+    public void deleteProd(@PathVariable String num) {
+        productService.deleteProd(num);
+    }
+
+    @PutMapping
+    public ProductResponse updateProd(@RequestBody Product product) {
+        ProductResponse response = new ProductResponse();
+        try {
+            productService.updateProd(product);
+            response.setRCode("00");
+            response.setMessage("Success!!!");
+
+        } catch (Exception e) {
+            response.setRCode("01");
+            response.setMessage(e.getMessage());
+        }
+        return response;
     }
 }

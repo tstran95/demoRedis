@@ -2,6 +2,7 @@ package com.redis.service;
 
 import com.redis.entity.Product;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface ProductService {
@@ -11,7 +12,7 @@ public interface ProductService {
 
     Product updateProd(Product product);
 
-    Product getById(Long id);
+    Product getByTransNum(String num);
 
-    void deleteProd(Long id);
+    void deleteProd(String num);
 }
