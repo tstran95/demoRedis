@@ -1,5 +1,7 @@
 package com.redis.validation;
 
+import com.redis.constant.Constant;
+import com.redis.entity.Product;
 import com.redis.exception.ProductException;
 
 import java.text.ParseException;
@@ -7,24 +9,28 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Validation {
-    public static void checkTime(String input) {
-        //checkTime
-        //throw ProductEx("Hong check duoc thoi gian")
+    public static void checkSaveProd(Product product) {
+        //TODO
+    }
 
-        //checkFormat
-        //throw ProductEx("Hong ckeck duoc format")
-
-
+    public static boolean validateTime(String input) {
+        boolean result = true;
         try {
             SimpleDateFormat formatter =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date inputDate = formatter.parse(input);
-            String dateToStr = input.substring(0 , input.indexOf(":") - 2) + "23:59:59";
-            Date endTheDay = formatter.parse(dateToStr);
-            // thực hiện validate và throw new ProductException("Mã lỗi")
-
-
-        }catch (ParseException e) {
-            throw new ProductException("Cant Parse!!!!!!");
+            formatter.parse(input);
+        }catch (Exception e) {
+            result = false;
         }
+        return result;
+    }
+
+    public static boolean checkNumber(String input) {
+        boolean result = true;
+        try {
+            Integer.parseInt(input);
+        }catch (Exception e) {
+            result = false;
+        }
+        return result;
     }
 }
