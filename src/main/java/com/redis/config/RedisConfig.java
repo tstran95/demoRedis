@@ -29,6 +29,7 @@ public class RedisConfig {
 //    }
 
     @Bean
+    // how to create
     public RedissonClient redissonClient() {
         Config config = new Config();
         config.useSingleServer()

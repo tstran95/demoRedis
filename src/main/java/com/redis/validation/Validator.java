@@ -1,15 +1,11 @@
 package com.redis.validation;
 
-import com.redis.constant.Constant;
 import com.redis.entity.Product;
-import com.redis.exception.ProductException;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
-public class Validation {
-    public static void checkSaveProd(Product product) {
+public class Validator {
+    public static void validateSaveProd(Product product) {
         //TODO
     }
 
