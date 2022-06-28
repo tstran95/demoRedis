@@ -45,17 +45,17 @@ public class TransInfoServiceImpl implements TransInfoService {
     }
 
     private String checkDuplicate(String autoGenStr , List<String> listValue, int count) {
-        boolean flag = true;
         for (int i = count; i > 0 ; i--) {
-            for (int j = 0; j < listValue.size() ; j++) {
-                if (autoGenStr.equals(listValue.get(j))) {
-                    flag = false;
+            boolean flag = false;
+            for (String str : listValue) {
+                if (autoGenStr.equals(str)) {
+                    flag = true;
                     autoGenStr = TransInfoUtils.generateNumber();
                     break;
                 }
             }
+            if (!flag) return autoGenStr;
         }
-        if (flag) return autoGenStr;
         return null;
     }
 }
