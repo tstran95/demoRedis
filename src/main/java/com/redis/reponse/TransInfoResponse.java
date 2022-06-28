@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 //@Data
-//@NoArgsConstructor
 //@AllArgsConstructor
-public class ProductResponse extends BaseResponse{
+//@NoArgsConstructor
+public class TransInfoResponse extends BaseResponse{
 }

@@ -1,0 +1,21 @@
+spring:
+  redis:
+    port: 6379
+    host: localhost
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/springboot_rabbitmq_example
+    username: root
+    password:
+server:
+  port: 8088
+banks:
+  - bankName: VNPAY
+    bankCode: 1234
+  - bankName: BIDV
+    bankCode: 1235
+  - bankName: TPBANK
+    bankCode: 1236

@@ -31,8 +31,8 @@ public class ProductServiceImpl implements ProductService {
             product.setToken(UUID.randomUUID().toString());
             product.setCreatedDate(new Timestamp((new Date()).getTime()).toString());
             // isExist???/
-            Object prod = template.opsForHash().get(Constant.PRODUCT_KEY, product.getTransactionNo());
-            if (Objects.nonNull(prod)) {
+            boolean hasProd = template.opsForHash().hasKey(Constant.PRODUCT_KEY , product.getTransactionNo());
+            if (hasProd) {
                 log.error("ProductServiceImpl saveProd ERROR");
                 throw new ProductException(MessageUtils.getMessage(Constant.DOUBLE_TRANS));
             }

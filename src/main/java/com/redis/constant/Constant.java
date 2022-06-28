@@ -2,6 +2,7 @@ package com.redis.constant;
 
 public class Constant {
     public static final String PRODUCT_KEY = "Product";
+    public static final String TRANS_INFO_KEY = "TransInfo";
     public static final String SUCCESS = "Success!!!!";
     public static final String ERROR = "ERROR!!!!";
     public static final String RCODE_00 = "00";
