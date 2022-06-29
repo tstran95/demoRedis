@@ -10,7 +10,12 @@ public class Main {
     public static void main(String[] args) {
         List<String> bankCodes = Arrays.asList("1233", "1234", "1241", "1231");
         List<String> listResult = Arrays.asList("123301", "123302", "123303", "123304", "123305", "123306", "123308", "123307", "123309");
-        System.out.println(recall(bankCodes.get(0), listResult, 5));
+//        System.out.println(recall(bankCodes.get(0), listResult, 5));
+        Random r = new Random();
+        int low = 1;
+        int high = 10;
+        int result = r.nextInt(high-low) + low;
+        System.out.println(result);
     }
 
     public static StringBuilder generateNumber() {

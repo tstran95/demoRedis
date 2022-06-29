@@ -8,6 +8,7 @@ public class Constant {
     public static final String RCODE_00 = "00";
     public static final String RCODE_01 = "01";
     public static final String RCODE_02 = "02";
+    public static final String EMPTY = "";
 
 
     public static final String PROD_NOT_FOUND = "NO001";

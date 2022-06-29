@@ -1,13 +1,16 @@
 package com.redis.utils;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 import java.util.Random;
 
+@Slf4j
 public class TransInfoUtils {
     public static String generateNumber() {
         Random random = new Random();
-        Integer num = random.nextInt(1000000);
-        StringBuilder numStr = new StringBuilder(num.toString());
+        int num = random.nextInt(1_000_000);
+        StringBuilder numStr = new StringBuilder(Integer.toString(num));
         while (numStr.length() < 6) {
             numStr.insert(0, "0");
         }
@@ -21,22 +24,24 @@ public class TransInfoUtils {
         return String.valueOf(stringBuilder);
     }
 
-    public static String recall(String str1, List<String> stringList, int count) {
-        for (int i = count; i > 0 ; i--) {
-            String strCompare = checkDone(str1);
-            boolean flag = true;
-            for (int j = 0; j < stringList.size(); j++) {
-                if (strCompare.equals(stringList.get(j))) {
-                    flag = false;
-                    System.out.println("Duplicate!!!!");
+    public static String checkDuplicate(String autoGenStr, List<String> listValue, int count) {
+        log.info("TransInfoServiceImpl checkDuplicate START with autoGenStr {}", autoGenStr);
+        for (int i = count; i > 0; i--) {
+            boolean flag = false;
+            for (String str : listValue) {
+                if (autoGenStr.equals(str)) {
+                    flag = true;
+                    log.info("TransInfoServiceImpl checkDuplicate Duplicate result!");
+                    autoGenStr = TransInfoUtils.generateNumber();
                     break;
                 }
             }
-            if (flag) {
-                return strCompare;
+            if (!flag) {
+                log.info("TransInfoServiceImpl checkDuplicate END with autoGenStr {}", autoGenStr);
+                return autoGenStr;
             }
         }
-        System.out.println("Cant gen code");
+        log.info("TransInfoServiceImpl checkDuplicate END with autoGenStr is null");
         return null;
     }
 }

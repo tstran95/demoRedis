@@ -4,58 +4,50 @@ import com.redis.constant.Constant;
 import com.redis.exception.VNPAYException;
 import com.redis.modal.TransInfo;
 import com.redis.service.TransInfoService;
+import com.redis.utils.JedisUtil;
 import com.redis.utils.ProductUtils;
 import com.redis.utils.TransInfoUtils;
 import lombok.AllArgsConstructor;
-import org.springframework.data.redis.core.RedisTemplate;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
+@Slf4j
 public class TransInfoServiceImpl implements TransInfoService {
-
-    private final RedisTemplate<Object, Object> template;
+    private final JedisUtil jedisUtil;
 
     @Override
     public void saveTransInfo(TransInfo transInfo) {
-        List<String> bankCodes = Arrays.asList("1231", "1232", "1233", "1234");
-        // sinh chuỗi 6 số
-        String autoGenStr = TransInfoUtils.generateNumber();
-        String strValueOfKey = (String) getAll(bankCodes.get(0));
-        List<String> listValue = Arrays.asList(strValueOfKey.split(","));
-        // đưa bankCode và kiểm tra chuỗi 6 số có bị trùng không
-        String result = checkDuplicate(autoGenStr , listValue , 5);
-        // nếu bị trùng thì cho retry lại 5 lần. Sau 5 lần mà vẫn lỗi thì throw exception
-        if (Objects.isNull(result)) throw new VNPAYException("Duplicate number!!!!");
-        // nếu không thì save và đặt expire cho key
-        String str = !strValueOfKey.equals("") ? (strValueOfKey + "," + result) : result;
-        template.opsForHash().put(Constant.TRANS_INFO_KEY , bankCodes.get(0) , str);
-        template.expire(Constant.TRANS_INFO_KEY, Duration.ofSeconds(ProductUtils.getTimeRemaining()));
-        System.out.println(str);
-
-    }
-    private Object getAll(String bankCode) {
-        Object str = template.opsForHash().get(Constant.TRANS_INFO_KEY , bankCode);
-        return Objects.isNull(str) ? "" : str ;
-    }
-
-    private String checkDuplicate(String autoGenStr , List<String> listValue, int count) {
-        for (int i = count; i > 0 ; i--) {
-            boolean flag = false;
-            for (String str : listValue) {
-                if (autoGenStr.equals(str)) {
-                    flag = true;
-                    autoGenStr = TransInfoUtils.generateNumber();
-                    break;
-                }
+        log.info("TransInfoServiceImpl saveTransInfo START with transInfo {}", transInfo);
+        List<String> bankCodes = Arrays.asList("1600", "1610", "1620", "1630");
+        try {
+            // sinh chuỗi 6 số
+            String autoGenStr = TransInfoUtils.generateNumber();
+            String strValueOfKey = jedisUtil.get(Constant.TRANS_INFO_KEY , bankCodes.get(0));
+            List<String> listValue = Arrays.asList(strValueOfKey.split(","));
+            // đưa bankCode và kiểm tra chuỗi 6 số có bị trùng không
+            String result = TransInfoUtils.checkDuplicate(autoGenStr, listValue, 5);
+            // nếu bị trùng thì cho retry lại 5 lần. Sau 5 lần mà vẫn lỗi thì throw exception
+            if (Objects.isNull(result)) {
+                log.info("TransInfoServiceImpl saveTransInfo Duplicate result ");
+                throw new VNPAYException("Duplicate number!!!!");
             }
-            if (!flag) return autoGenStr;
+            // nếu không thì save và đặt expire cho key
+            String str = !strValueOfKey.isEmpty() ? (strValueOfKey + "," + result) : result;
+            jedisUtil.save(Constant.TRANS_INFO_KEY , bankCodes.get(0), str );
+            jedisUtil.expire(Constant.TRANS_INFO_KEY, ProductUtils.getTimeRemaining());
+        } catch (VNPAYException e) {
+            log.info("TransInfoServiceImpl saveTransInfo error with message ", e);
+            throw e;
+        } catch (Exception e) {
+            log.error("TransInfoServiceImpl saveTransInfo error with message ", e);
+            throw e;
         }
-        return null;
+        log.info("TransInfoServiceImpl saveTransInfo END");
     }
 }
