@@ -1,61 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <property name="LOG" value="./logs"></property>
 
-    <property name="LOGS" value="./logs" />
-
-    <!--  INFO  -->
-    <appender name="Console"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOGS}/info.log</file>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss} - %msg%n
-            </Pattern>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
         </encoder>
-
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- rollover daily -->
-            <fileNamePattern>${LOGS}/archived/info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>10MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-
     </appender>
 
-    <!--  WARNING  -->
-    <appender name="warning"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOGS}/warning.log</file>
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>WARNING</level>
-        </filter>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss} - %msg%n
-            </Pattern>
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG}/logback.log</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
-
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- rollover daily -->
-            <fileNamePattern>${LOGS}/archived/warning.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>10MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-
     </appender>
 
-    <logger name="com.redis" level="trace"
-            additivity="false">
-        <appender-ref ref="Console" />
-        <appender-ref ref="warning" />
+    <logger name="com.redis">
+        <appender-ref ref="console"/>
     </logger>
 
     <root level="info">
-        <appender-ref ref="LOGS" />
+        <appender-ref ref="file" />
     </root>
-
 </configuration>
