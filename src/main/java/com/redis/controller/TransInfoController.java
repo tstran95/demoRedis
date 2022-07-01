@@ -25,7 +25,7 @@ public class TransInfoController {
         TransInfoResponse response = new TransInfoResponse();
         int count = 0;
         try {
-            for (int i = 0; i < 1_000; i++) {
+            for (int i = 0; i < 100_000; i++) {
                 transInfoService.saveTransInfo(transInfo);
                 count++;
             }

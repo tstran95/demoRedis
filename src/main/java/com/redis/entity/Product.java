@@ -36,4 +36,12 @@ public class Product implements Serializable {
 
     @Column(name = "updated_date")
     private String UpdateDate;
+
+
+    public Product(String transactionNo, String name, int qty, Double price) {
+        this.transactionNo = transactionNo;
+        this.name = name;
+        this.qty = qty;
+        this.price = price;
+    }
 }

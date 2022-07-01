@@ -28,10 +28,14 @@ public class TransInfoServiceImpl implements TransInfoService {
         try {
             // sinh chuỗi 6 số
             String autoGenStr = TransInfoUtils.generateNumber();
+            log.info("LOG 1");
             String strValueOfKey = jedisUtil.get(Constant.TRANS_INFO_KEY , bankCodes.get(0));
+            log.info("LOG 2");
             List<String> listValue = Arrays.asList(strValueOfKey.split(","));
+            log.info("LOG 3");
             // đưa bankCode và kiểm tra chuỗi 6 số có bị trùng không
             String result = TransInfoUtils.checkDuplicate(autoGenStr, listValue, 5);
+            log.info("LOG 4");
             // nếu bị trùng thì cho retry lại 5 lần. Sau 5 lần mà vẫn lỗi thì throw exception
             if (Objects.isNull(result)) {
                 log.info("TransInfoServiceImpl saveTransInfo Duplicate result ");
@@ -39,8 +43,11 @@ public class TransInfoServiceImpl implements TransInfoService {
             }
             // nếu không thì save và đặt expire cho key
             String str = !strValueOfKey.isEmpty() ? (strValueOfKey + "," + result) : result;
+            log.info("LOG 5");
             jedisUtil.save(Constant.TRANS_INFO_KEY , bankCodes.get(0), str );
+            log.info("LOG 6");
             jedisUtil.expire(Constant.TRANS_INFO_KEY, ProductUtils.getTimeRemaining());
+            log.info("LOG 7");
         } catch (VNPAYException e) {
             log.info("TransInfoServiceImpl saveTransInfo error with message ", e);
             throw e;

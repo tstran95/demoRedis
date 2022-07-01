@@ -49,9 +49,9 @@ public class JedisUtil {
     }
 
     /* Determines whether a hash field exists or not. */
-    public Boolean exits(String key) {
+    public boolean exits(String key , String field) {
         try (Jedis jedis = jedisPool.getResource()) {
-            return jedis.exists(key);
+            return jedis.hexists(key, field);
         } catch (Exception e) {
             return false;
         }
