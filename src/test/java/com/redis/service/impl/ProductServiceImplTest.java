@@ -93,8 +93,8 @@ class ProductServiceImplTest {
 
     @Test
     void saveProd_CantConnectWithRedis() {
-        Mockito.when(jedisPoolFactory.generateJedisPoolFactory()).thenReturn(null);
-//        jedisPoolFactory.generateJedisPoolFactory().getResource().close();
+//        Mockito.when(jedisPoolFactory.generateJedisPoolFactory()).thenReturn(null);
+        jedisPoolFactory.generateJedisPoolFactory().destroy();
         Product product = new Product("1115", "Iphone 12", 1, 12333.0);
         Exception exception = assertThrows(Exception.class, () -> {
             productServiceImpl.saveProd(product);
