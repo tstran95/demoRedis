@@ -56,4 +56,17 @@ public class JedisUtil {
             return false;
         }
     }
+
+    public boolean saveInSet(String bankCode, String autoGenStr) {
+        try (Jedis jedis = jedisPool.getResource()) {
+            Long resultOfAdd=  jedis.sadd(bankCode , autoGenStr);
+            if ( resultOfAdd == 0) {
+                return false;
+            }
+            expire(bankCode , ProductUtils.getTimeRemaining());
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 }

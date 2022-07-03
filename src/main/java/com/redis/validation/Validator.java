@@ -32,10 +32,17 @@ public class Validator {
     public static boolean checkNumber(String input) {
         boolean result = true;
         try {
+            if (checkNothing(input)) {
+                result = false;
+            }
             Integer.parseInt(input);
         }catch (Exception e) {
             result = false;
         }
         return result;
+    }
+
+    public static boolean checkNothing(String input) {
+        return input.equals("0");
     }
 }

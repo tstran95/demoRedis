@@ -29,13 +29,13 @@ import static org.mockito.ArgumentMatchers.any;
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class ProductServiceImplTest {
     @Mock
-    JedisPoolFactory jedisPoolFactory;
+    private JedisPoolFactory jedisPoolFactory;
 
     @Mock
-    JedisUtil jedisUtil;
+    private JedisUtil jedisUtil;
 
     @InjectMocks
-    ProductServiceImpl productServiceImpl;
+    private ProductServiceImpl productServiceImpl;
 
 
     @BeforeEach
@@ -56,7 +56,7 @@ class ProductServiceImplTest {
     void saveProd_Fail_SaveMethodError() {
         Product product = new Product("1110", "Iphone 10", 1, 12333.0);
         Mockito.when(jedisUtil.save(any(String.class), any(String.class), any(String.class)))
-                                .thenThrow(new RuntimeException("ERROR"));
+                                .thenThrow(RuntimeException.class);
         Exception exception = assertThrows(ProductException.class, () -> {
             productServiceImpl.saveProd(product);
         });
@@ -65,9 +65,9 @@ class ProductServiceImplTest {
 
     @Test
     void saveProd_ProductNull() {
-        Product product = null;
+//        Product product = null;
         Exception exception = assertThrows(ProductException.class , () -> {
-            productServiceImpl.saveProd(product);
+            productServiceImpl.saveProd(null);
         });
         assertEquals(exception.getMessage(), MessageUtils.getMessage(Constant.PROD_NULL));
     }
