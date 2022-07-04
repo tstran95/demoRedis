@@ -3,18 +3,34 @@ package com.redis.validation;
 import com.redis.constant.Constant;
 import com.redis.entity.Product;
 import com.redis.exception.ProductException;
+import com.redis.exception.VNPAYException;
+import com.redis.modal.TransInfo;
 import com.redis.utils.MessageUtils;
+import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 public class Validator {
+
     public static void validateSaveProd(Product product) {
         if (Objects.isNull(product.getTransactionNo())) {
             throw new ProductException(MessageUtils.getMessage(Constant.TRANS_NO_NULL));
         }
         if (product.getQty() < 0) {
             throw new ProductException(MessageUtils.getMessage(Constant.QTY_WRONG));
+        }
+    }
+
+    public static void validateSaveTrans(TransInfo transInfo) {
+        if (Constant.EMPTY.equals(transInfo.getUserName())) {
+            throw new VNPAYException(MessageUtils.getMessage(Constant.USER_NAME_EMPTY));
+        }
+        if (transInfo.getAmount() <= 0) {
+            throw new VNPAYException(MessageUtils.getMessage(Constant.AMOUNT_WRONG));
+        }
+        if (!checkNumber(transInfo.getPhoneNumber())) {
+            throw new VNPAYException(MessageUtils.getMessage(Constant.PHONE_WRONG));
         }
     }
 
@@ -32,17 +48,10 @@ public class Validator {
     public static boolean checkNumber(String input) {
         boolean result = true;
         try {
-            if (checkNothing(input)) {
-                result = false;
-            }
             Integer.parseInt(input);
         }catch (Exception e) {
             result = false;
         }
         return result;
-    }
-
-    public static boolean checkNothing(String input) {
-        return input.equals("0");
     }
 }

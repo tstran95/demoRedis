@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import java.time.Duration;
+
 @Configuration
 @Slf4j
 public class JedisPoolFactory {
@@ -23,14 +25,14 @@ public class JedisPoolFactory {
             poolConfig.setMaxTotal(1_00_000);
             poolConfig.setMaxIdle(1_00_000);
             poolConfig.setMinIdle(5);
-//        poolConfig.setMaxWaitMillis(maxWaitMillis);
-            // Whether to block when the connection is exhausted, false will report an exception, true will block until the timeout, and the default is true
+            poolConfig.setMaxWait(Duration.ofSeconds(100_000));
+            // Whether to block when the connection is exhausted,
+            // false will report an exception, true will block until the timeout,
+            // and the default is true
             poolConfig.setBlockWhenExhausted(Boolean.TRUE);
             return new JedisPool(poolConfig, "127.0.0.1", 6379, 100000);
         } catch (Exception e) {
             throw new VNPAYException(MessageUtils.getMessage(Constant.CONNECT_REDIS_ERROR));
         }
-        // If the Redis password is set, please call the following constructor
-//        JedisPool jedisPool = new JedisPool(poolConfig, host, port, timeout, password);
     }
 }

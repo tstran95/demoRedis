@@ -1,6 +1,7 @@
 package com.redis.utils;
 
 import com.redis.constant.Constant;
+import com.redis.exception.VNPAYException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,9 +20,9 @@ public class JedisUtil {
     public Long save(String key , String field , String value) {
         try (Jedis jedis = jedisPool.getResource()) {
             return jedis.hset(key , field , value);
-        } catch (Exception e) {
-            log.error("Hset redis Ex: ", e);
-            throw e;
+        } catch (VNPAYException e) {
+            log.error("Hset redis Ex: {}", MessageUtils.getMessage(Constant.CONNECT_REDIS_ERROR));
+            throw new VNPAYException(MessageUtils.getMessage(Constant.CONNECT_REDIS_ERROR));
         }
     }
     public Long expire(String key, Long time) {
