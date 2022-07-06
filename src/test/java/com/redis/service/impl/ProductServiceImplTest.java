@@ -53,7 +53,7 @@ class ProductServiceImplTest {
 
     @Test
     @Order(2)
-    void saveProd_Fail_SaveMethodInRedisError() {
+    void saveProd_FailWithSaveMethodInRedisError() {
         Product product = new Product("1110", "Iphone 10", 1, 12333.0);
         Mockito.when(jedisUtil.save(any(), any(), any()))
                                 .thenThrow(new ProductException(MessageUtils.getMessage(Constant.CONNECT_REDIS_ERROR)));
@@ -63,7 +63,7 @@ class ProductServiceImplTest {
 
     @Test
     @Order(3)
-    void saveProd_Fail_ExistMethodInRedisError() {
+    void saveProd_FailWithExistMethodInRedisError() {
         Product product = new Product("1110", "Iphone 10", 1, 12333.0);
         Mockito.when(jedisUtil.exits(any(), any()))
                 .thenThrow(new ProductException(MessageUtils.getMessage(Constant.CONNECT_REDIS_ERROR)));
@@ -73,7 +73,7 @@ class ProductServiceImplTest {
 
     @Test
     @Order(4)
-    void saveProd_Fail_ExpireMethodInRedisError() {
+    void saveProd_FailWithExpireMethodInRedisError() {
         Product product = new Product("1110", "Iphone 10", 1, 12333.0);
         Mockito.when(jedisUtil.expire(any(), any()))
                 .thenThrow(new ProductException(MessageUtils.getMessage(Constant.CONNECT_REDIS_ERROR)));
@@ -84,15 +84,15 @@ class ProductServiceImplTest {
 
     @Test
     @Order(5)
-    void saveProd_ProductNull() {
-//        Product product = null;
+    void saveProd_FailWithProductNull() {
         Exception exception = assertThrows(ProductException.class , () -> productServiceImpl.saveProd(null));
         assertEquals(exception.getMessage(), MessageUtils.getMessage(Constant.PROD_NULL));
     }
 
     @Test
     @Order(6)
-    void saveProd_DuplicateTransNo() {
+    void saveProd_FailWithDuplicateTransNo() {
+        Mockito.when(jedisUtil.exits(any() , any())).thenReturn(true);
         Product product = new Product("1115", "Iphone 12", 1, 12333.0);
         Exception exception = assertThrows(ProductException.class, () -> productServiceImpl.saveProd(product));
         assertEquals(exception.getMessage(), MessageUtils.getMessage(Constant.DOUBLE_TRANS));
@@ -100,7 +100,7 @@ class ProductServiceImplTest {
 
     @Test
     @Order(7)
-    void saveProd_TransNoNull() {
+    void saveProd_FailWithTransNoNull() {
         Product product = new Product();
         Exception exception = assertThrows(ProductException.class , () -> {
             productServiceImpl.saveProd(product);
@@ -110,7 +110,7 @@ class ProductServiceImplTest {
 
     @Test
     @Order(8)
-    public void saveProd_QuantityIsNegativeNumber() {
+    public void saveProd_FailWithQuantityIsNegativeNumber() {
         Product product = new Product("1233" ,"Iphone 11", -1 , 123.0);
         Exception exception = assertThrows(ProductException.class , () -> {
             productServiceImpl.saveProd(product);

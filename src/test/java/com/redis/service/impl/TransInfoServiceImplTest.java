@@ -2,17 +2,13 @@ package com.redis.service.impl;
 
 import com.redis.constant.Constant;
 import com.redis.exception.VNPAYException;
-import com.redis.modal.TransInfo;
+import com.redis.model.TransInfo;
 import com.redis.utils.JedisUtil;
 import com.redis.utils.MessageUtils;
-import com.redis.utils.ProductUtils;
-import com.redis.utils.TransInfoUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -101,5 +97,18 @@ class TransInfoServiceImplTest {
         Mockito.when(jedisUtil.saveInSet(any(), any())).thenReturn(false);
         Exception exception = assertThrows(VNPAYException.class , () -> transInfoService.saveTransInfo(transInfo));
         assertEquals(MessageUtils.getMessage(Constant.DOUBLE_TRANS) , exception.getMessage());
+    }
+
+    @Test
+    void saveTransInfo_FailSaveToRedis() {
+        TransInfo transInfo = new TransInfo("SonTT",
+                "VNPAY",
+                "0967787122",
+                true,
+                123.0);
+        Mockito.when(jedisUtil.saveInSet(any(), any())).thenThrow(new VNPAYException(MessageUtils.
+                                                                getMessage(Constant.CONNECT_REDIS_ERROR)));
+        Exception exception = assertThrows(VNPAYException.class , () -> transInfoService.saveTransInfo(transInfo));
+        assertEquals(MessageUtils. getMessage(Constant.CONNECT_REDIS_ERROR) , exception.getMessage());
     }
 }

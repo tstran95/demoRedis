@@ -44,4 +44,8 @@ public class TransInfoUtils {
         log.info("TransInfoServiceImpl checkDuplicate END with autoGenStr is null");
         return null;
     }
+
+    public static void main(String[] args) {
+        System.out.println(TransInfoUtils.generateNumber());
+    }
 }

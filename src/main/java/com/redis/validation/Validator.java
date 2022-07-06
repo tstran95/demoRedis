@@ -4,13 +4,17 @@ import com.redis.constant.Constant;
 import com.redis.entity.Product;
 import com.redis.exception.ProductException;
 import com.redis.exception.VNPAYException;
-import com.redis.modal.TransInfo;
+import com.redis.model.TransInfo;
 import com.redis.utils.MessageUtils;
+import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Objects;
+import java.util.Random;
 
+@Component
+@Data
 public class Validator {
 
     public static void validateSaveProd(Product product) {

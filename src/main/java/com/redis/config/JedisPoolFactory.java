@@ -27,10 +27,9 @@ public class JedisPoolFactory {
             poolConfig.setMinIdle(5);
             poolConfig.setMaxWait(Duration.ofSeconds(100_000));
             // Whether to block when the connection is exhausted,
-            // false will report an exception, true will block until the timeout,
-            // and the default is true
+            // false will report an exception, true will block until the timeout
             poolConfig.setBlockWhenExhausted(Boolean.TRUE);
-            return new JedisPool(poolConfig, "127.0.0.1", 6379, 100000);
+            return new JedisPool(poolConfig, "localhost", 6379, 100000);
         } catch (Exception e) {
             throw new VNPAYException(MessageUtils.getMessage(Constant.CONNECT_REDIS_ERROR));
         }

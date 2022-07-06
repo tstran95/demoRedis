@@ -48,13 +48,13 @@ public class ProductServiceImpl implements ProductService {
             jedisUtil.expire(Constant.PRODUCT_KEY, ProductUtils.getTimeRemaining());
             log.info("ProductServiceImpl saveProd END with response {}", product);
             return product;
-//        }
-//        catch (ParseException e) {
-//            log.error("ProductServiceImpl saveProd ERROR with message {}", e.getMessage());
-//            throw new ProductException(Constant.NO003);
-        } catch (Exception e) {
+        }catch (ProductException e ) {
             log.error("ProductServiceImpl saveProd ERROR with message {}", e.getMessage());
             throw e;
+        }
+        catch (Exception e) {
+            log.error("ProductServiceImpl saveProd ERROR with message {}", e.getMessage());
+            throw new ProductException(MessageUtils.getMessage(Constant.INTERNAL_SERVER_ERROR));
         }
     }
 //

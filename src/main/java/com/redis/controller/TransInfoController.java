@@ -1,8 +1,7 @@
 package com.redis.controller;
 
 import com.redis.constant.Constant;
-import com.redis.exception.VNPAYException;
-import com.redis.modal.TransInfo;
+import com.redis.model.TransInfo;
 import com.redis.reponse.TransInfoResponse;
 import com.redis.service.TransInfoService;
 import lombok.AllArgsConstructor;
@@ -24,8 +23,9 @@ public class TransInfoController {
         log.info("TransInfoController saveTransInfo START with transInfo {}" , transInfo);
         TransInfoResponse response = new TransInfoResponse();
         int count = 0;
+        int numOfTesting = 1_000_000;
         try {
-            for (int i = 0; i < 1_000_000; i++) {
+            for (int i = 0; i < numOfTesting; i++) {
                 transInfoService.saveTransInfo(transInfo);
                 count++;
             }

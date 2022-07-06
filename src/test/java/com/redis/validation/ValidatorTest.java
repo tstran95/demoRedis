@@ -1,24 +1,19 @@
 package com.redis.validation;
 
-import com.redis.config.JedisPoolFactory;
 import com.redis.constant.Constant;
 import com.redis.entity.Product;
 import com.redis.exception.ProductException;
 import com.redis.exception.VNPAYException;
-import com.redis.service.impl.ProductServiceImpl;
-import com.redis.utils.JedisUtil;
+import com.redis.model.TransInfo;
 import com.redis.utils.MessageUtils;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -38,23 +33,48 @@ class ValidatorTest {
     @Test
     void validateSaveProd_InputTransNoNull() {
         Exception exception = assertThrows(ProductException.class , () -> Validator.validateSaveProd(product));
-        assertEquals(exception.getMessage() , MessageUtils.getMessage(Constant.TRANS_NO_NULL));
+        assertEquals(MessageUtils.getMessage(Constant.TRANS_NO_NULL) , exception.getMessage() );
     }
 
     @Test
     void validateSaveProd_InputQtyWrong() {
         product.setTransactionNo("123445");
         Exception exception = assertThrows(ProductException.class , () -> Validator.validateSaveProd(product));
-        assertEquals(exception.getMessage() , MessageUtils.getMessage(Constant.QTY_WRONG));
+        assertEquals(MessageUtils.getMessage(Constant.QTY_WRONG) , exception.getMessage());
     }
 
     @Test
-    void validateTime() {
+    void validateSaveTrans_InputUserNameEmpty() {
+        TransInfo transInfo = new TransInfo("" , "VNPAY", "0987734567", true , 123.8);
+        Exception exception = assertThrows(VNPAYException.class , () -> Validator.validateSaveTrans(transInfo));
+        assertEquals(MessageUtils.getMessage(Constant.USER_NAME_EMPTY) , exception.getMessage());
     }
 
-//    @Test
-//    void checkNumber() {
-//        Mockito.when(Validator.checkNothing("0")).thenReturn(true);
-//        assertFalse(Validator.checkNumber("0"));
-//    }
+    @Test
+    void validateSaveTrans_InputAmountWrong() {
+        TransInfo transInfo = new TransInfo("SonTT",
+                "VNPAY",
+                "0967787432",
+                true,
+                -123.0);
+        Exception exception = assertThrows(VNPAYException.class , () -> Validator.validateSaveTrans(transInfo));
+        assertEquals(MessageUtils.getMessage(Constant.AMOUNT_WRONG) , exception.getMessage());
+    }
+
+    @Test
+    void validateSaveTrans_FailWithPhoneWrong() {
+        TransInfo transInfo = new TransInfo("SonTT",
+                "VNPAY",
+                "0967787a2",
+                true,
+                123.0);
+
+        Exception exception = assertThrows(VNPAYException.class , () -> Validator.validateSaveTrans(transInfo));
+        assertEquals(MessageUtils.getMessage(Constant.PHONE_WRONG) , exception.getMessage());
+    }
+
+    @Test
+    @Disabled
+    void validateTime() {
+    }
 }

@@ -25,4 +25,6 @@ public class Constant {
     public static final String AMOUNT_WRONG = "N0009";
     public static final String TRANS_INFO_NULL = "N0010";
     public static final String PHONE_WRONG = "N0011";
+    public static final String INTERNAL_SERVER_ERROR = "N1111";
+
 }

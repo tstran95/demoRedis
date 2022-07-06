@@ -2,7 +2,7 @@ package com.redis.service.impl;
 
 import com.redis.constant.Constant;
 import com.redis.exception.VNPAYException;
-import com.redis.modal.TransInfo;
+import com.redis.model.TransInfo;
 import com.redis.service.TransInfoService;
 import com.redis.utils.JedisUtil;
 import com.redis.utils.MessageUtils;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 @Service
 @AllArgsConstructor
@@ -22,25 +23,31 @@ import java.util.Objects;
 public class TransInfoServiceImpl implements TransInfoService {
     private final JedisUtil jedisUtil;
 
+    /**
+     * save TransInfo
+     * @param transInfo
+     */
     @Override
     public void saveTransInfo(TransInfo transInfo) {
         log.info("TransInfoServiceImpl saveTransInfo START with transInfo {}", transInfo);
         List<String> bankCodes = Arrays.asList("1600", "1610", "1620", "1630");
+        int randomNum = (new Random()).nextInt(bankCodes.size());
         if (Objects.isNull(transInfo)) {
             throw new VNPAYException(MessageUtils.getMessage(Constant.TRANS_INFO_NULL));
         }
         try {
+            // Validate process
             Validator.validateSaveTrans(transInfo);
             String autoGenStr;
             // Can retry 5 times
             for (int i = 0; i <= 5; i++) {
                 if (i == 5) {
                     log.info("TransInfoServiceImpl saveTransInfo Duplicate result ");
-                    throw new VNPAYException(MessageUtils.getMessage(Constant.DOUBLE_TRANS));
+//                    throw new VNPAYException(MessageUtils.getMessage(Constant.DOUBLE_TRANS));
                 }
                 // generate string with 6 number
                 autoGenStr = TransInfoUtils.generateNumber();
-                boolean result = jedisUtil.saveInSet(bankCodes.get(0) , autoGenStr);
+                boolean result = jedisUtil.saveInSet(bankCodes.get(randomNum) , autoGenStr);
                 if (result) break;
             }
         } catch (VNPAYException e) {
@@ -48,7 +55,7 @@ public class TransInfoServiceImpl implements TransInfoService {
             throw e;
         } catch (Exception e) {
             log.error("TransInfoServiceImpl saveTransInfo error with message ", e);
-            throw e;
+            throw new VNPAYException(MessageUtils.getMessage(Constant.INTERNAL_SERVER_ERROR));
         }
         log.info("TransInfoServiceImpl saveTransInfo END");
     }

@@ -29,8 +29,8 @@ public class JedisUtil {
         try (Jedis jedis = jedisPool.getResource()) {
             return jedis.expire(key , Math.toIntExact(time));
         } catch (Exception e) {
-            log.error("Hset redis Ex: ", e);
-            throw e;
+            log.error("Hset redis Ex: {}", MessageUtils.getMessage(Constant.CONNECT_REDIS_ERROR));
+            throw new VNPAYException(MessageUtils.getMessage(Constant.CONNECT_REDIS_ERROR));
         }
     }
     /**
@@ -45,7 +45,8 @@ public class JedisUtil {
             String result = jedis.hget(key, field);
             return Objects.isNull(result) ? Constant.EMPTY : result;
         } catch (Exception e) {
-            throw e;
+            log.error("Hset redis Ex: {}", MessageUtils.getMessage(Constant.CONNECT_REDIS_ERROR));
+            throw new VNPAYException(MessageUtils.getMessage(Constant.CONNECT_REDIS_ERROR));
         }
     }
 
@@ -61,6 +62,8 @@ public class JedisUtil {
     public boolean saveInSet(String bankCode, String autoGenStr) {
         try (Jedis jedis = jedisPool.getResource()) {
             Long resultOfAdd=  jedis.sadd(bankCode , autoGenStr);
+            System.out.println(resultOfAdd + " NUM");
+            System.out.println(autoGenStr + " AUTO GEN");
             if ( resultOfAdd == 0) {
                 return false;
             }
