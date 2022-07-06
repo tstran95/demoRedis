@@ -25,7 +25,8 @@ public class TransInfoServiceImpl implements TransInfoService {
 
     /**
      * save TransInfo
-     * @param transInfo
+     * generate string with 6 number
+     * check duplicate with data in redis
      */
     @Override
     public void saveTransInfo(TransInfo transInfo) {

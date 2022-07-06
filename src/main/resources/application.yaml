@@ -12,18 +12,11 @@ spring:
     password:
 server:
   port: 8088
-#banks:
-#  - bankName: VNPAY
-#    bankCode: 1234
-#  - bankName: BIDV
-#    bankCode: 1235
-#  - bankName: TPBANK
-#    bankCode: 1236
 banks:
   banks:
-    - bankName: VNPAY
-      bankCode: 1234
-    - bankName: BIDV
-      bankCode: 1235
-    - bankName: TPBANK
-      bankCode: 1236
+    - bank-name: VNPAY
+      bank-code: 1234
+    - bank-name: BIDV
+      bank-code: 1235
+    - bank-name: TPBANK
+      bank-code: 12346
