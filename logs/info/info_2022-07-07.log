@@ -1,0 +1,110 @@
+09:26:04.359 [restartedMain] INFO  com.redis.DemoRedisApplication - Starting DemoRedisApplication using Java 11.0.15 on sontt1 with PID 8140 (D:\Example\redisDemo\demoRedis\target\classes started by sontt1 in D:\Example\redisDemo\demoRedis)
+09:26:04.359 [restartedMain] INFO  com.redis.DemoRedisApplication - Starting DemoRedisApplication using Java 11.0.15 on sontt1 with PID 8140 (D:\Example\redisDemo\demoRedis\target\classes started by sontt1 in D:\Example\redisDemo\demoRedis)
+09:26:04.360 [restartedMain] INFO  com.redis.DemoRedisApplication - No active profile set, falling back to 1 default profile: "default"
+09:26:04.360 [restartedMain] INFO  com.redis.DemoRedisApplication - No active profile set, falling back to 1 default profile: "default"
+09:26:04.401 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:26:04.402 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:26:04.989 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+09:26:04.989 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:26:05.014 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.redis.repository.ProductRepository. If you want this repository to be a JPA repository, consider annotating your entities with one of these annotations: javax.persistence.Entity, javax.persistence.MappedSuperclass (preferred), or consider extending one of the following types with your repository: org.springframework.data.jpa.repository.JpaRepository.
+09:26:05.014 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 19 ms. Found 0 JPA repository interfaces.
+09:26:05.024 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+09:26:05.025 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+09:26:05.075 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 45 ms. Found 1 Redis repository interfaces.
+09:26:05.576 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8088 (http)
+09:26:05.583 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8088"]
+09:26:05.584 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:26:05.584 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.63]
+09:26:05.657 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:26:05.657 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1255 ms
+09:26:05.848 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.9.Final
+09:26:05.951 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+09:26:06.034 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:26:06.123 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:26:06.135 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect
+09:26:06.266 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:26:06.273 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:26:07.769 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:26:07.905 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8088"]
+09:26:07.918 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8088 (http) with context path ''
+09:26:07.930 [restartedMain] INFO  com.redis.DemoRedisApplication - Started DemoRedisApplication in 3.853 seconds (JVM running for 5.182)
+09:26:07.930 [restartedMain] INFO  com.redis.DemoRedisApplication - Started DemoRedisApplication in 3.853 seconds (JVM running for 5.182)
+09:27:25.411 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+09:27:25.414 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+09:27:25.423 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+09:27:32.141 [restartedMain] INFO  com.redis.DemoRedisApplication - Starting DemoRedisApplication using Java 11.0.15 on sontt1 with PID 15932 (D:\Example\redisDemo\demoRedis\target\classes started by sontt1 in D:\Example\redisDemo\demoRedis)
+09:27:32.141 [restartedMain] INFO  com.redis.DemoRedisApplication - Starting DemoRedisApplication using Java 11.0.15 on sontt1 with PID 15932 (D:\Example\redisDemo\demoRedis\target\classes started by sontt1 in D:\Example\redisDemo\demoRedis)
+09:27:32.143 [restartedMain] INFO  com.redis.DemoRedisApplication - No active profile set, falling back to 1 default profile: "default"
+09:27:32.143 [restartedMain] INFO  com.redis.DemoRedisApplication - No active profile set, falling back to 1 default profile: "default"
+09:27:32.176 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:27:32.176 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:27:32.668 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+09:27:32.668 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:27:32.690 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.redis.repository.ProductRepository. If you want this repository to be a JPA repository, consider annotating your entities with one of these annotations: javax.persistence.Entity, javax.persistence.MappedSuperclass (preferred), or consider extending one of the following types with your repository: org.springframework.data.jpa.repository.JpaRepository.
+09:27:32.691 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 0 JPA repository interfaces.
+09:27:32.699 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+09:27:32.700 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+09:27:32.739 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 1 Redis repository interfaces.
+09:27:33.141 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8088 (http)
+09:27:33.146 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8088"]
+09:27:33.146 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:27:33.147 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.63]
+09:27:33.228 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:27:33.228 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1051 ms
+09:27:33.388 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.9.Final
+09:27:33.478 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+09:27:33.540 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:27:33.624 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:27:33.635 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect
+09:27:33.770 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:27:33.776 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:27:35.266 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:27:35.352 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8088"]
+09:27:35.365 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8088 (http) with context path ''
+09:27:35.376 [restartedMain] INFO  com.redis.DemoRedisApplication - Started DemoRedisApplication in 3.528 seconds (JVM running for 4.78)
+09:27:35.376 [restartedMain] INFO  com.redis.DemoRedisApplication - Started DemoRedisApplication in 3.528 seconds (JVM running for 4.78)
+09:27:53.103 [http-nio-8088-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:27:53.104 [http-nio-8088-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:27:53.104 [http-nio-8088-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+09:27:53.307 [http-nio-8088-exec-1] INFO  c.redis.controller.ProductController - ProductController saveProd START with request Product(token=null, transactionNo=12345, name=Iphone X, qty=1, price=123.0, CreatedDate=null, UpdateDate=null)
+09:27:53.307 [http-nio-8088-exec-1] INFO  c.redis.controller.ProductController - ProductController saveProd START with request Product(token=null, transactionNo=12345, name=Iphone X, qty=1, price=123.0, CreatedDate=null, UpdateDate=null)
+09:27:53.308 [http-nio-8088-exec-1] INFO  c.r.service.impl.ProductServiceImpl - ProductServiceImpl saveProd START with request Product(token=null, transactionNo=12345, name=Iphone X, qty=1, price=123.0, CreatedDate=null, UpdateDate=null)
+09:27:53.308 [http-nio-8088-exec-1] INFO  c.r.service.impl.ProductServiceImpl - ProductServiceImpl saveProd START with request Product(token=null, transactionNo=12345, name=Iphone X, qty=1, price=123.0, CreatedDate=null, UpdateDate=null)
+09:27:55.074 [http-nio-8088-exec-3] INFO  c.redis.controller.ProductController - ProductController saveProd START with request Product(token=null, transactionNo=12345, name=Iphone X, qty=1, price=123.0, CreatedDate=null, UpdateDate=null)
+09:27:55.074 [http-nio-8088-exec-3] INFO  c.redis.controller.ProductController - ProductController saveProd START with request Product(token=null, transactionNo=12345, name=Iphone X, qty=1, price=123.0, CreatedDate=null, UpdateDate=null)
+09:27:55.074 [http-nio-8088-exec-3] INFO  c.r.service.impl.ProductServiceImpl - ProductServiceImpl saveProd START with request Product(token=null, transactionNo=12345, name=Iphone X, qty=1, price=123.0, CreatedDate=null, UpdateDate=null)
+09:27:55.074 [http-nio-8088-exec-3] INFO  c.r.service.impl.ProductServiceImpl - ProductServiceImpl saveProd START with request Product(token=null, transactionNo=12345, name=Iphone X, qty=1, price=123.0, CreatedDate=null, UpdateDate=null)
+09:28:52.750 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+09:28:52.752 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+09:28:52.758 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+09:29:05.770 [restartedMain] INFO  com.redis.DemoRedisApplication - Starting DemoRedisApplication using Java 11.0.15 on sontt1 with PID 11044 (D:\Example\redisDemo\demoRedis\target\classes started by sontt1 in D:\Example\redisDemo\demoRedis)
+09:29:05.770 [restartedMain] INFO  com.redis.DemoRedisApplication - Starting DemoRedisApplication using Java 11.0.15 on sontt1 with PID 11044 (D:\Example\redisDemo\demoRedis\target\classes started by sontt1 in D:\Example\redisDemo\demoRedis)
+09:29:05.771 [restartedMain] INFO  com.redis.DemoRedisApplication - No active profile set, falling back to 1 default profile: "default"
+09:29:05.771 [restartedMain] INFO  com.redis.DemoRedisApplication - No active profile set, falling back to 1 default profile: "default"
+09:29:05.802 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:29:05.802 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:29:06.288 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+09:29:06.288 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:29:06.311 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.redis.repository.ProductRepository. If you want this repository to be a JPA repository, consider annotating your entities with one of these annotations: javax.persistence.Entity, javax.persistence.MappedSuperclass (preferred), or consider extending one of the following types with your repository: org.springframework.data.jpa.repository.JpaRepository.
+09:29:06.312 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 17 ms. Found 0 JPA repository interfaces.
+09:29:06.321 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+09:29:06.322 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+09:29:06.372 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 44 ms. Found 1 Redis repository interfaces.
+09:29:06.768 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8088 (http)
+09:29:06.773 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8088"]
+09:29:06.773 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:29:06.773 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.63]
+09:29:06.837 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:29:06.837 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1034 ms
+09:29:06.988 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.9.Final
+09:29:07.069 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+09:29:07.130 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:29:07.213 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:29:07.224 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect
+09:29:07.350 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:29:07.356 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:29:08.743 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:29:08.839 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8088"]
+09:29:08.855 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8088 (http) with context path ''
+09:29:08.867 [restartedMain] INFO  com.redis.DemoRedisApplication - Started DemoRedisApplication in 3.372 seconds (JVM running for 4.794)
+09:29:08.867 [restartedMain] INFO  com.redis.DemoRedisApplication - Started DemoRedisApplication in 3.372 seconds (JVM running for 4.794)

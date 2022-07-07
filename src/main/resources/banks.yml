@@ -1,7 +1,0 @@
-banks:
-  - bankName: VNPAY
-    bankCode: 1234
-  - bankName: BIDV
-    bankCode: 1235
-  - bankName: TPBANK
-    bankCode: 1236

@@ -1,5 +1,7 @@
 <configuration>
-    <property name="LOG" value="./logs"></property>
+    <property name="LOG" value="./logs"/>
+    <timestamp key="byDay" datePattern="yyyy-MM-dd"/>
+
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -7,45 +9,89 @@
         </encoder>
     </appender>
 
-    <appender name="SAVE-TO-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-
-        <file>${LOG}/log.log</file>
-
+    <!-- INFO -->
+    <appender name="FILE-INFO"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG}/info/info_${byDay}.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>
-                %d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
-            </Pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
 
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>
-                ${LOG}/log_%d{dd-MM-yyyy}_%i.log
-            </fileNamePattern>
-            <minIndex>2</minIndex>
-            <maxIndex>3</maxIndex>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG}/archived/info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
-
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>1KB</maxFileSize>
-        </triggeringPolicy>
 
     </appender>
 
-    <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>${LOG}/log_%d{dd-MM-yyyy}.log</file>
-        <append>true</append>
-        <immediateFlush>true</immediateFlush>
-        <encoder>
+
+    <!-- WARN -->
+    <appender name="FILE-WARN"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG}/warn/warn_${byDay}.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG}/archived/warn.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+    </appender>
+
+    <!-- ERROR -->
+    <appender name="FILE-ERROR"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG}/error/error_${byDay}.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG}/archived/error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
     </appender>
 
     <logger name="com.redis">
         <appender-ref ref="console"/>
+        <appender-ref ref="FILE-INFO" />
+        <appender-ref ref="FILE-WARN" />
+        <appender-ref ref="FILE-ERROR" />
     </logger>
 
     <root level="all">
-        <appender-ref ref="file" />
-        <appender-ref ref="SAVE-TO-FILE" />
+        <appender-ref ref="FILE-INFO" />
+        <appender-ref ref="FILE-WARN" />
+        <appender-ref ref="FILE-ERROR" />
     </root>
 </configuration>
